@@ -18,11 +18,15 @@ define_macros = []
 lib_subdir = []
 
 # Check if windows linux or mac to pass flag
+# Switch to VS 16 2019: 
+# [https://github.com/colcon/colcon-cmake/issues/45#issuecomment-498331922]
 if system() == 'Windows':
-    cmake_args += ['-G', 'Visual Studio 15 2017']
+    # cmake_args += ['-G', 'Visual Studio 15 2017']
+    cmake_args += ['-G', 'Visual Studio 16 2019']
     # Differentiate between 32-bit and 64-bit
     if sys.maxsize // 2 ** 32 > 0:
-        cmake_args[-1] += ' Win64'
+        # cmake_args[-1] += ' Win64'
+        cmake_args += ['-A', 'x64']
     cmake_build_flags += ['--config', 'Release']
     lib_name = 'osqp.lib'
     lib_subdir = ['Release']
